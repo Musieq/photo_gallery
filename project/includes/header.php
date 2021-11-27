@@ -1,3 +1,8 @@
+<?php
+ob_start();
+include 'admin\includes\init.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
