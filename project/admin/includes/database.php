@@ -54,6 +54,8 @@ class DB {
                 $this->error('Unable to process MySQL query. Check your params - ' . $this->query->error);
             }
 
+            $this->queryClosed = false;
+
         } else {
             $this->error('Unable to prepare MySQL statement. Check your syntax - ' . $this->connection->error);
         }
