@@ -60,10 +60,63 @@ class DB {
             $this->error('Unable to prepare MySQL statement. Check your syntax - ' . $this->connection->error);
         }
 
+        // Return object - results ($query)
         return $this;
     }
 
-    public function error($error) {
+/*    public function xd() {
+        $argsArray = ['xd'];
+        $metadata = $this->query->result_metadata();
+        foreach ($metadata->fetch_field() as $field) {
+            $argsArray = $field->name;
+        }
+        print_r($argsArray);
+
+        return $argsArray;
+    }*/
+
+    public function fetchAll(): array {
+        $results = $this->query->get_result();
+        $this->query->close();
+        $this->queryClosed = true;
+
+        return $results->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function fetchArray(): array {
+        $results = $this->query->get_result();
+        $this->query->close();
+        $this->queryClosed = true;
+
+        $allRows = [];
+        // Get all rows
+        while($row = $results->fetch_array(MYSQLI_BOTH)){
+            $allRows[] = $row;
+        }
+
+        return $allRows;
+    }
+/*    public function fetchArray() {
+        $params = array();
+        $row = array();
+        $meta = $this->query->result_metadata();
+        while ($field = $meta->fetch_field()) {
+            $params[] = &$row[$field->name];
+        }
+        call_user_func_array(array($this->query, 'bind_result'), $params);
+        $result = array();
+        while ($this->query->fetch()) {
+            foreach ($row as $key => $val) {
+                $result[$key] = $val;
+            }
+        }
+        $this->query->close();
+        $this->queryClosed = TRUE;
+        return $result;
+    }*/
+
+
+    protected function error($error) {
         if ($this->showErrors) {
             exit($error);
         }
