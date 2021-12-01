@@ -1,6 +1,7 @@
 <?php
 
-include 'database.php';
+include 'db.php';
+include 'user.php';
 
 // Database connection constants
 const DB_HOST = 'localhost';
@@ -11,5 +12,12 @@ const DB_NAME = 'blog';
 // Database connection
 $db = new DB(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
-$db->query("SELECT * FROM users");
+/*$test = $db->query("SELECT * FROM users")->fetchAll();
+
+    foreach ($test as $val) {
+        echo $val['username'] . "<br>";
+    }*/
+
+
+
 
