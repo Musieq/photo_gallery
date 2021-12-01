@@ -10,6 +10,8 @@ class DB {
     public function __construct($dbHost, $dbUser, $dbPassword, $dbName) {
         $this->connection = new mysqli($dbHost, $dbUser, $dbPassword, $dbName);
 
+        $this->connection->set_charset('utf8mb4_general_ci');
+
         if ($this->connection->connect_error) {
             $this->error('Failed to connect to MySQL - ' . $this->connection->connect_error);
         }
@@ -18,6 +20,7 @@ class DB {
     public function query($stmt): object {
         if (!$this->queryClosed) {
             $this->query->close();
+            $this->queryClosed = true;
         }
 
         if ($this->connection->prepare($stmt)) {
@@ -32,19 +35,17 @@ class DB {
 
                 foreach ($args as $arg) {
                     if (is_array($arg)) {
-                        $argsArray = &$arg;
+                        $argsArray = $arg;
                         foreach ($arg as $arrArg) {
                             $types .= $this->_gettype($arrArg);
                         }
                     } else {
-                        $argsArray[] = &$arg;
+                        $argsArray[] = $arg;
                         $types .= $this->_gettype($arg);
                     }
                 }
 
-                // Put types on the beginning of an array and then call 'bind_param' with this array
-                array_unshift($argsArray, $types);
-                call_user_func_array(array($this->query, 'bind_param'), $argsArray);
+                $this->query->bind_param($types, ...$argsArray);
             }
 
             // Execute query
@@ -63,17 +64,6 @@ class DB {
         // Return object - results ($query)
         return $this;
     }
-
-/*    public function xd() {
-        $argsArray = ['xd'];
-        $metadata = $this->query->result_metadata();
-        foreach ($metadata->fetch_field() as $field) {
-            $argsArray = $field->name;
-        }
-        print_r($argsArray);
-
-        return $argsArray;
-    }*/
 
     public function fetchAll(): array {
         $results = $this->query->get_result();
@@ -97,12 +87,12 @@ class DB {
         return $allRows;
     }
 
-    public function numRows() {
+    public function numRows(): int {
         $this->query->store_result();
         return $this->query->num_rows;
     }
 
-    public function affectedRows() {
+    public function affectedRows(): int {
         return $this->query->affected_rows;
     }
 
