@@ -1,7 +1,7 @@
 <?php
 
-include 'db.php';
-include 'user.php';
+include 'class/db.php';
+include 'class/user.php';
 
 // Database connection constants
 const DB_HOST = 'localhost';
