@@ -73,6 +73,7 @@ class DB {
         return $results->fetch_all(MYSQLI_ASSOC);
     }
 
+
     public function fetchArray(): array {
         $results = $this->query->get_result();
         $this->query->close();
@@ -89,7 +90,12 @@ class DB {
 
     public function numRows(): int {
         $this->query->store_result();
-        return $this->query->num_rows;
+        $numRows = $this->query->num_rows;
+
+        $this->query->close();
+        $this->queryClosed = true;
+
+        return $numRows;
     }
 
     public function affectedRows(): int {
