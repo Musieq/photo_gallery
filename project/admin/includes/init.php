@@ -1,7 +1,10 @@
 <?php
 
-include 'class/db.php';
-include 'class/user.php';
+// Autoload classes
+spl_autoload_register(function($class) {
+    require 'class/' . $class . '.php';
+});
+
 
 // Database connection constants
 const DB_HOST = 'localhost';
