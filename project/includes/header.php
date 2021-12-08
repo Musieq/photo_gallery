@@ -14,8 +14,10 @@ include 'admin\includes\init.php';
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/styles.css" rel="stylesheet" />
+    <link href="admin/css/bootstrap.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
 </head>
+
 <body>
 <!-- Responsive navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
