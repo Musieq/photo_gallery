@@ -1,8 +1,6 @@
 <?php
 include 'includes/header.php';
 
-/** User init **/
-$user = new User();
 ?>
     <div id="layoutSidenav">
 
