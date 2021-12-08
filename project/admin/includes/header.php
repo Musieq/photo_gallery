@@ -1,6 +1,10 @@
 <?php
 ob_start();
 include 'init.php';
+$user = new User();
+if (!$user->isAdmin()) {
+    redirect('../');
+}
 ?>
 
 <!DOCTYPE html>
