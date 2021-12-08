@@ -40,6 +40,11 @@ if (isset($_POST['submitLogin'])) {
                                         <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
                                         <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
                                     </div>
+
+                                    <?php
+                                    $session->displayError();
+                                    ?>
+
                                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                         <a class="small" href="admin/password.html">Forgot Password?</a>
                                         <button type="submit" class="btn btn-primary" id="submitLogin" name="submitLogin">Login</button>

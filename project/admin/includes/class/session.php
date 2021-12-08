@@ -7,6 +7,7 @@ class Session {
     public int $userID;
     public string $userRole;
     public string $username;
+    public string $error = '';
 
 
     function __construct() {
@@ -61,7 +62,7 @@ class Session {
 
             redirect("index.php");
         } else {
-            echo 'boo';
+            $this->error = "Incorrect username or password.";
         }
     }
 
@@ -72,6 +73,18 @@ class Session {
             $this->sessionVarExist();
 
             redirect("index.php");
+        }
+    }
+
+
+    public function displayError() {
+        if ($this->error !== '') {
+            ?>
+            <div class="alert alert-danger">
+                <?=$this->error?>
+            </div>
+            <?php
+            $this->error = '';
         }
     }
 }
