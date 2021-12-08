@@ -81,7 +81,7 @@ class DB {
 
         $allRows = [];
         // Get all rows
-        while($row = $results->fetch_array(MYSQLI_BOTH)){
+        while($row = $results->fetch_array(MYSQLI_NUM)){
             $allRows[] = $row;
         }
 
