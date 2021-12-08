@@ -1,5 +1,8 @@
 <?php
 include 'includes/header.php';
+/**
+ * @var object $user
+ */
 
 ?>
     <div id="layoutSidenav">
