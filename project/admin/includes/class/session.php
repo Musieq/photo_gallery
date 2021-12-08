@@ -36,25 +36,42 @@ class Session {
         return $this->signedIn;
     }
 
-    public function login() {
-        global $db;
 
-        $username = 'admin';
-        $password = 'admin';
+    public function isAdmin(): bool {
+        if ($this->isSignedIn()) {
+            if ($this->userRole === 'admin') {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+
+    public function login($username, $password) {
+        global $db;
 
         $user5 = $db->query('SELECT id, role FROM users WHERE username = ? AND password = ?', $username, $password);
         if ($userArr = $user5->fetchAll()) {
             $_SESSION['userID'] = $userArr[0]['id'];
             $_SESSION['userRole'] = $userArr[0]['role'];
             $_SESSION['username'] = $username;
+
+            redirect("index.php");
         } else {
-            // Wrong credentials
+            echo 'boo';
         }
     }
 
 
     public function logout() {
-        unset($_SESSION);
-        $this->sessionVarExist();
+        if (isset($_GET['logout'])) {
+            $_SESSION = [];
+            $this->sessionVarExist();
+
+            redirect("index.php");
+        }
     }
 }
