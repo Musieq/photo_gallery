@@ -1,10 +1,13 @@
 <?php
 ob_start();
 include 'init.php';
-$user = new User();
-if (!$user->isAdmin()) {
+/**
+ * @var object $session
+ */
+if (!$session->isAdmin()) {
     redirect('../');
 }
+
 ?>
 
 <!DOCTYPE html>
