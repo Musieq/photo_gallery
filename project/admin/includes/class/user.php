@@ -1,6 +1,7 @@
 <?php
 
 
+
 class User {
 
     public function getAllUsers(): array {
@@ -13,5 +14,20 @@ class User {
         global $db;
 
         return $db->query('SELECT * FROM users WHERE id = ?', $id)->fetchAll();
+    }
+
+
+    public function isAdmin(): bool {
+        global $session;
+
+        if ($session->isSignedIn()) {
+            if ($session->userRole === 'user') {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 }
