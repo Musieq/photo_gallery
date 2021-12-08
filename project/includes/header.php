@@ -1,6 +1,12 @@
 <?php
 ob_start();
 include 'admin\includes\init.php';
+
+/**
+ * @var object $session
+ */
+
+$session->logout();
 ?>
 
 <!DOCTYPE html>
@@ -30,7 +36,24 @@ include 'admin\includes\init.php';
                 <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li>
-                <li class="nav-item"><a class="nav-link" href="admin/">Admin</a></li>
+                <?php
+                if ($session->isAdmin()) {
+                    ?>
+                    <li class="nav-item"><a class="nav-link" href="admin/">Admin</a></li>
+                    <?php
+                }
+
+                if (!$session->isSignedIn()) {
+                    ?>
+                    <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
+                    <?php
+                } else {
+                    ?>
+                    <li class="nav-item"><a class="nav-link" href="index.php?logout=1">Logout</a></li>
+                    <?php
+                }
+                ?>
+
             </ul>
         </div>
     </div>
