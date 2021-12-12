@@ -56,9 +56,13 @@ class User {
     public function register($username, $password, $email) {
         global $db;
         if (!$this->getUserByUsername($username)) {
-            $password = password_hash($password, PASSWORD_DEFAULT);
+            $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-            $db->query('INSERT INTO users(username, password, email) VALUES (?, ?, ?)', $username, $password, $email);
+            $db->query('INSERT INTO users(username, password, email) VALUES (?, ?, ?)', $username, $passwordHash, $email);
+
+            if ($db->affectedRows() === 1) {
+                $this->login($username, $password);
+            }
         } else {
             $this->error = 'Username already taken';
         }
