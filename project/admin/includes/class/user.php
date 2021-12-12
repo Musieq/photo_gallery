@@ -83,7 +83,7 @@ class User {
     }
 
 
-    public function displayError($error = '') {
+    public function displayError() {
         if ($this->error !== '') {
             ?>
             <div class="alert alert-danger">
