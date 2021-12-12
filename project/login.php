@@ -47,13 +47,13 @@ if (isset($_POST['submitLogin'])) {
                                     ?>
 
                                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                        <a class="small" href="admin/password.html">Forgot Password?</a>
+                                        <a class="small" href="#">Forgot Password?</a>
                                         <button type="submit" class="btn btn-primary" id="submitLogin" name="submitLogin">Login</button>
                                     </div>
                                 </form>
                             </div>
                             <div class="card-footer text-center py-3">
-                                <div class="small"><a href="admin/register.html">Need an account? Sign up!</a></div>
+                                <div class="small"><a href="register.php">Need an account? Sign up!</a></div>
                             </div>
                         </div>
                     </div>

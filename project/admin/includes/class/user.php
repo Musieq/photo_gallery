@@ -14,16 +14,21 @@ class User {
     }
 
 
-    public function getUser($id): array {
+    public function getUserByID($id): array {
         global $db;
 
         return $db->query('SELECT * FROM users WHERE id = ?', $id)->fetchAll();
     }
 
 
-    public function login($username, $password) {
+    public function getUserByUsername($username): array {
         global $db;
 
+        return $db->query('SELECT * FROM users WHERE username = ?', $username)->fetchAll();
+    }
+
+
+    public function login($username, $password) {
         if ($userArr = self::verifyUser($username, $password)) {
             $_SESSION['userID'] = $userArr[0]['id'];
             $_SESSION['userRole'] = $userArr[0]['role'];
@@ -48,14 +53,33 @@ class User {
     }
 
 
-    static function verifyUser($username, $password): array {
+    public function register($username, $password, $email) {
         global $db;
+        if (!$this->getUserByUsername($username)) {
+            $password = password_hash($password, PASSWORD_DEFAULT);
 
-        return $db->query('SELECT id, role FROM users WHERE username = ? AND password = ?', $username, $password)->fetchAll();
+            $db->query('INSERT INTO users(username, password, email) VALUES (?, ?, ?)', $username, $password, $email);
+        } else {
+            $this->error = 'Username already taken';
+        }
     }
 
 
-    public function displayError() {
+    static function verifyUser($username, $password): array {
+        global $db;
+
+        if ($userPasswordArr = $db->query('SELECT password FROM users WHERE username = ?', $username)->fetchAll()) {
+            $userPassword = $userPasswordArr[0]['password'];
+            if (password_verify($password, $userPassword)) {
+                return $db->query('SELECT id, role FROM users WHERE username = ?', $username)->fetchAll();
+            }
+        }
+
+        return [];
+    }
+
+
+    public function displayError($error = '') {
         if ($this->error !== '') {
             ?>
             <div class="alert alert-danger">
