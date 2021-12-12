@@ -6,7 +6,8 @@ include 'admin\includes\init.php';
  * @var object $session
  */
 
-$session->logout();
+$user = new User();
+$user->logout();
 ?>
 
 <!DOCTYPE html>

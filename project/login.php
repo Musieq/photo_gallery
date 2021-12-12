@@ -2,19 +2,20 @@
 require "includes/header.php";
 /**
  * @var object $session
+ * @var object $user
  */
 
 if($session->isSignedIn()) {
     redirect("index.php");
 }
 
-
 if (isset($_POST['submitLogin'])) {
     $username = $_POST['inputUsername'];
     $password = $_POST['inputPassword'];
     // TODO: remember me
 
-    $session->login($username, $password);
+
+    $user->login($username, $password);
 }
 ?>
 
@@ -42,7 +43,7 @@ if (isset($_POST['submitLogin'])) {
                                     </div>
 
                                     <?php
-                                    $session->displayError();
+                                    $user->displayError();
                                     ?>
 
                                     <div class="d-flex align-items-center justify-content-between mt-4 mb-0">

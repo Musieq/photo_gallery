@@ -24,7 +24,6 @@ $session = new Session();
     foreach ($test as $val) {
         echo $val['username'] . "<br>";
     }*/
-$session->login();
 
-
+//$session->logout();
 
