@@ -17,7 +17,12 @@ if (isset($_POST['submitRegister'])) {
     $email = $_POST['inputEmail'];
 
     if ($password === $confirmPassword) {
-        $user->register($username, $password, $email);
+        if (strlen($username) < 5 || strlen($username) > 60) {$user->error = 'Check username length - allowed 5 to 60 characters';}
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL) || strlen($email) > 150) {$user->error = 'Email is invalid - maximum 150 characters';}
+
+        if ($user->error === '') {
+            $user->register($username, $password, $email);
+        }
     } else {
         $user->error = 'Passwords are different';
     }
@@ -36,23 +41,23 @@ if (isset($_POST['submitRegister'])) {
                             <div class="card-body">
                                 <form method="post" action="register.php">
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="inputUsername" name="inputUsername" type="text" placeholder="Username" />
+                                        <input class="form-control" id="inputUsername" name="inputUsername" type="text" placeholder="Username" minlength="5" maxlength="60" required/>
                                         <label for="inputUsername">Username</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="inputEmail" name="inputEmail" type="email" placeholder="name@example.com" />
+                                        <input class="form-control" id="inputEmail" name="inputEmail" type="email" placeholder="name@example.com" required/>
                                         <label for="inputEmail">Email address</label>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3 mb-md-0">
-                                                <input class="form-control" id="inputPassword" name="inputPassword" type="password" placeholder="Create a password" />
+                                                <input class="form-control" id="inputPassword" name="inputPassword" type="password" placeholder="Create a password" required/>
                                                 <label for="inputPassword">Password</label>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3 mb-md-0">
-                                                <input class="form-control" id="inputPasswordConfirm" name="inputPasswordConfirm" type="password" placeholder="Confirm password" />
+                                                <input class="form-control" id="inputPasswordConfirm" name="inputPasswordConfirm" type="password" placeholder="Confirm password" required/>
                                                 <label for="inputPasswordConfirm">Confirm Password</label>
                                             </div>
                                         </div>

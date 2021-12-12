@@ -30,11 +30,11 @@ if (isset($_POST['submitLogin'])) {
                             <div class="card-body">
                                 <form method="post" action="login.php">
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="inputUsername" name="inputUsername" type="text" placeholder="Username" />
+                                        <input class="form-control" id="inputUsername" name="inputUsername" type="text" placeholder="Username" required/>
                                         <label for="inputUsername">Username</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="inputPassword" name="inputPassword" type="password" placeholder="Password" />
+                                        <input class="form-control" id="inputPassword" name="inputPassword" type="password" placeholder="Password" required/>
                                         <label for="inputPassword">Password</label>
                                     </div>
                                     <div class="form-check mb-3">
