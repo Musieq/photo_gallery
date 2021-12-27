@@ -1,8 +1,7 @@
 <?php
 include 'includes/header.php';
-/**
- * @var object $user
- */
+
+$user = new User();
 
 ?>
     <div id="layoutSidenav">
@@ -26,7 +25,7 @@ include 'includes/sidenav.php';
                         <thead>
                             <tr>
                                 <th scope="col">Username</th>
-                                <th scope="col">Login</th>
+                                <th scope="col">E-mail</th>
                                 <th scope="col">Creation date</th>
                                 <th scope="col">Role</th>
                             </tr>
@@ -40,7 +39,7 @@ include 'includes/sidenav.php';
                             ?>
                             <tr>
                                 <td><?=$row['username']?></td>
-                                <td><?=$row['login']?></td>
+                                <td><?=$row['email']?></td>
                                 <td><?=$row['creation_date']?></td>
                                 <td><?=$row['role']?></td>
                             </tr>
