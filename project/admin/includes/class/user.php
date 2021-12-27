@@ -5,6 +5,7 @@
 class User {
 
     public string $error = '';
+    public int $insertID;
 
 
     public function getAllUsers(): array {
@@ -61,6 +62,7 @@ class User {
             $db->query('INSERT INTO users(username, password, email) VALUES (?, ?, ?)', $username, $passwordHash, $email);
 
             if ($db->affectedRows() === 1) {
+                $this->insertID = $db->lastInsertID();
                 $this->login($username, $password);
             }
         } else {
@@ -93,5 +95,8 @@ class User {
             $this->error = '';
         }
     }
+
+
+
 
 }
