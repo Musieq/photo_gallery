@@ -10,7 +10,7 @@ class DB {
     public function __construct($dbHost, $dbUser, $dbPassword, $dbName) {
         $this->connection = new mysqli($dbHost, $dbUser, $dbPassword, $dbName);
 
-        $this->connection->set_charset('utf8mb4_general_ci');
+        $this->connection->set_charset('utf8');
 
         if ($this->connection->connect_error) {
             $this->error('Failed to connect to MySQL - ' . $this->connection->connect_error);
