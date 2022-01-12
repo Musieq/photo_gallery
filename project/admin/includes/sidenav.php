@@ -11,10 +11,6 @@
                     <div class="sb-nav-link-icon"><i class="bi bi-people"></i></div>
                     Users
                 </a>
-                <a class="nav-link" href="upload.php">
-                    <div class="sb-nav-link-icon"><i class="bi bi-images"></i></div>
-                    Upload image
-                </a>
                 <a class="nav-link" href="comments.php">
                     <div class="sb-nav-link-icon"><i class="bi bi-chat"></i></div>
                     Comments
