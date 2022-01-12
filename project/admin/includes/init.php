@@ -7,7 +7,7 @@ spl_autoload_register(function($class) {
 });
 
 // Root directory
-define("rootDirectory", dirname(__DIR__, 2));
+define("ROOT_DIRECTORY", dirname(__DIR__, 2));
 
 // Database connection constants
 const DB_HOST = 'localhost';
